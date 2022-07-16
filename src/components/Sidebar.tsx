@@ -36,7 +36,7 @@ const Sidebar = () => {
     {
       name: 'Help',
       href: 'https://github.com/mhmulford0/Gllry#using-gllry',
-
+      target: '_blank',
       icon: SupportIcon,
       current: false
     }
@@ -50,6 +50,8 @@ const Sidebar = () => {
             <Link href={item.href} key={item.name}>
               <a
                 href={item.href}
+                target={item?.target ? item.target : undefined}
+                rel="noreferrer"
                 className={classNames(
                   item.current
                     ? 'bg-stone-600 text-white'
