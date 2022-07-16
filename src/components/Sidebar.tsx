@@ -1,4 +1,9 @@
-import { PhotographIcon, GlobeIcon, HomeIcon } from '@heroicons/react/outline'
+import {
+  PhotographIcon,
+  GlobeIcon,
+  HomeIcon,
+  SupportIcon
+} from '@heroicons/react/outline'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -27,6 +32,13 @@ const Sidebar = () => {
       href: '/public',
       icon: GlobeIcon,
       current: router.pathname === '/public' || router.pathname === '/u/[...address]'
+    },
+    {
+      name: 'Help',
+      href: 'https://github.com/mhmulford0/Gllry#using-gllry',
+
+      icon: SupportIcon,
+      current: false
     }
   ]
 
