@@ -12,7 +12,7 @@ import LoadingSpinner from './images/LoadingSpinner'
 import type { Nft } from './NftDetails'
 
 interface Props {
-  nftList: Nft[]
+  nftList: Nft[] | undefined;
   setSelectedNft: Dispatch<SetStateAction<Nft>>
   isLoading: boolean
 }
@@ -43,7 +43,7 @@ const PersonalGallery = ({ nftList, setSelectedNft, isLoading }: Props) => {
                 <Connect />
               </>
             )}
-            {nftList?.length > 0 && !isLoading && (
+            {nftList && nftList?.length > 0 && !isLoading && (
               <animated.div style={springProps}>
                 <Masonry
                   breakpointCols={{ default: 2, 1200: 1 }}

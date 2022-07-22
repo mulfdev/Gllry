@@ -5,6 +5,7 @@ import Pusher from 'pusher-js'
 import { supabase } from '../utils/supabaseClient'
 
 import { useNetwork } from 'wagmi'
+import { Nft } from '../components/NftDetails'
 
 const pusher = new Pusher('fe24b78a961219eb9328', {
   cluster: process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER as string
@@ -12,16 +13,16 @@ const pusher = new Pusher('fe24b78a961219eb9328', {
 
 const useFetchNfts = (address: string | undefined) => {
   const { activeChain } = useNetwork()
-  const [selectedNft, setSelectedNft] = useState()
-  const [nftList, setNftList] = useState<Record<string, string | any[] | null>>({
-    data: [],
+  const [selectedNft, setSelectedNft] = useState<Nft>({} as Nft)
+  const [nftList, setNftList] = useState<Record<string, any>>({
+    data: [{}],
     message: ''
   })
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     if (typeof address === 'undefined' || activeChain?.name !== 'Ethereum') {
-      setSelectedNft(undefined)
+      setSelectedNft({} as Nft)
       setNftList({ data: [] })
       setIsLoading(false)
       return
