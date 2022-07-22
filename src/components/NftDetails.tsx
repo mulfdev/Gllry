@@ -1,22 +1,28 @@
 export interface Nft {
-  selectedNft: {
-    metadata: {
-      description: string
-      name: string
-      image: string
-      contentType: string
-      animation_url: string
-      attributes: [
-        {
-          value: string
-          trait_type: string
-        }
-      ]
-    }
+  local_id?: Readonly<string>;
+  owner: string
+  contract: string
+  last_metadata_sync?: string
+  token_uri?: string
+  metadata: {
+    description: string
+    name: string
+    image: string
+    contentType: string
+    animation_url?: string
+    attributes: [
+      {
+        value: string
+        trait_type: string
+      }
+    ]
   }
 }
 
-const NftDetails = ({ selectedNft }: Nft) => {
+interface Props {
+  selectedNft: Nft
+}
+const NftDetails = ({ selectedNft }: Props) => {
   return (
     <aside className="hidden min-w-[24rem] w-1/5 bg-white p-8 border-l border-gray-200 overflow-y-auto lg:block">
       <div className="block min-w-fit rounded-lg overflow-hidden drop-shadow-lg bg-white mx-auto md:min-h-[100px] md:max-h-[800px]">

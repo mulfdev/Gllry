@@ -13,7 +13,7 @@ import type { Nft } from './NftDetails'
 
 interface Props {
   nftList: Nft[]
-  setSelectedNft: Dispatch<SetStateAction<undefined>>
+  setSelectedNft: Dispatch<SetStateAction<Nft>>
   isLoading: boolean
 }
 

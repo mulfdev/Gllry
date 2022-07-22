@@ -1,10 +1,11 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import ImgLoadingError from './images/ImgLoadingError'
 import LoadingSpinner from './images/LoadingSpinner'
+import { Nft } from './NftDetails'
 
 interface Props {
-  nft: any
-  setSelectedNft: Dispatch<SetStateAction<any>>
+  nft: Nft
+  setSelectedNft: Dispatch<SetStateAction<Nft>>
 }
 
 const Gallery = ({ nft, setSelectedNft }: Props) => {

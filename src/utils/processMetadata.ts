@@ -1,5 +1,6 @@
 import got from 'got'
 import Pusher from 'pusher'
+import { Nft } from '../components/NftDetails'
 import { supabase } from './supabaseClient'
 
 const pusher = new Pusher({
@@ -9,9 +10,9 @@ const pusher = new Pusher({
   cluster: process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER as string
 })
 
-export default async function processMetadata(nfts: any) {
+export default async function processMetadata(nfts: Nft[]) {
   const pushData = await Promise.all(
-    nfts.map(async (nft: any) => {
+    nfts.map(async (nft: Nft) => {
       if (nft.metadata.image?.startsWith('http')) {
         try {
           const metadataReq = await got(nft.metadata.image, {
@@ -20,7 +21,7 @@ export default async function processMetadata(nfts: any) {
               limit: 2
             },
             timeout: {
-              request: 1500
+              request: 900
             }
           })
 
