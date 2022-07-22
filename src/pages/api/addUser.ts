@@ -38,7 +38,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     )
 
     const filter = mapUriToMetadata.filter(
-      (nft: any) => typeof nft?.metadata === 'string'
+      (nft: Nft) => typeof nft?.metadata === 'string'
     )
 
     for await (const nft of filter) {

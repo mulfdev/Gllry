@@ -13,8 +13,8 @@ const pusher = new Pusher('fe24b78a961219eb9328', {
 const useFetchNfts = (address: string | undefined) => {
   const { activeChain } = useNetwork()
   const [selectedNft, setSelectedNft] = useState()
-  const [nftList, setNftList] = useState<any>({
-    data: null,
+  const [nftList, setNftList] = useState<Record<string, string | any[] | null>>({
+    data: [],
     message: ''
   })
   const [isLoading, setIsLoading] = useState(true)
@@ -22,7 +22,7 @@ const useFetchNfts = (address: string | undefined) => {
   useEffect(() => {
     if (typeof address === 'undefined' || activeChain?.name !== 'Ethereum') {
       setSelectedNft(undefined)
-      setNftList([])
+      setNftList({ data: [] })
       setIsLoading(false)
       return
     }

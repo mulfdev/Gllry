@@ -50,7 +50,7 @@ const PersonalGallery = ({ nftList, setSelectedNft, isLoading }: Props) => {
                   className="my-masonry-grid"
                   columnClassName="my-masonry-grid_column"
                 >
-                  {nftList.map((nft: any) => {
+                  {nftList.map((nft: Nft) => {
                     return (
                       <GalleryItem
                         key={nft.local_id}
