@@ -62,7 +62,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     processMetadata(dbData)
-    console.log(dbData)
 
     return res.status(200).json({ message: 'user added', nftData: dbData })
   } catch (error) {
