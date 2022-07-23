@@ -12,7 +12,7 @@ import LoadingSpinner from './images/LoadingSpinner'
 import type { Nft } from './NftDetails'
 
 interface Props {
-  nftList: Nft[] | undefined;
+  nftList: Nft[] | undefined
   setSelectedNft: Dispatch<SetStateAction<Nft>>
   isLoading: boolean
 }
@@ -63,7 +63,9 @@ const PersonalGallery = ({ nftList, setSelectedNft, isLoading }: Props) => {
               </animated.div>
             )}
 
-            {nftList?.length === 0 && !isLoading && <EmptyResult />}
+            {nftList?.length === 0 && !isLoading && account?.address === 'undefined' && (
+              <EmptyResult />
+            )}
           </ul>
         </section>
       </div>

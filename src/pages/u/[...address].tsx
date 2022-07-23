@@ -23,7 +23,7 @@ function GetNftsByAddress() {
         isLoading={isLoading}
       />
 
-      {selectedNft !== undefined && <NftDetails selectedNft={selectedNft} />}
+      {selectedNft?.owner !== undefined && <NftDetails selectedNft={selectedNft} />}
     </>
   )
 }
