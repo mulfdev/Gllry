@@ -36,6 +36,29 @@ const PersonalGallery = ({ nftList, setSelectedNft, isLoading }: Props) => {
     )
   }
 
+  if (typeof account?.address === 'undefined' && !isLoading) {
+    return (
+      <main className="flex-1 overflow-y-auto">
+        <div className="pt-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Header />
+          <section
+            className="mx-auto mt-8 pb-16 max-w-5xl"
+            aria-labelledby="gallery-heading"
+          >
+            <ul role="list">
+              <>
+                <h1 className="text-center w-full text-4xl md:text-5xl my-16">
+                  Please Connect Your Wallet
+                </h1>
+                <Connect />
+              </>
+            </ul>
+          </section>
+        </div>
+      </main>
+    )
+  }
+
   return (
     <main className="flex-1 overflow-y-auto">
       <div className="pt-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -45,15 +68,7 @@ const PersonalGallery = ({ nftList, setSelectedNft, isLoading }: Props) => {
           aria-labelledby="gallery-heading"
         >
           <ul role="list">
-            {typeof account?.address === 'undefined' && !isLoading && (
-              <>
-                <h1 className="text-center w-full text-4xl md:text-5xl my-16">
-                  Please Connect Your Wallet
-                </h1>
-                <Connect />
-              </>
-            )}
-            {nftList && nftList?.length > 0 ? (
+            {nftList && nftList?.length > 0 && account?.address ? (
               <animated.div style={springProps}>
                 <Masonry
                   breakpointCols={{ default: 2, 1200: 1 }}
