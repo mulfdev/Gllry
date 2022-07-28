@@ -21,29 +21,54 @@ const PersonalGallery = ({ nftList, setSelectedNft, isLoading }: Props) => {
   const { data: account } = useAccount()
   const springProps = useSpring({ opacity: isLoading ? 0 : 1, delay: 400 })
 
-  return (
-    <main className="flex-1 overflow-y-auto">
-      <div className="pt-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Header />
-        {isLoading && (
-          <div className="flex justify-center mt-32">
-            <LoadingSpinner />
-          </div>
-        )}
-        <section
-          className="mx-auto mt-8 pb-16 max-w-5xl"
-          aria-labelledby="gallery-heading"
-        >
-          <ul role="list">
-            {typeof account?.address === 'undefined' && !isLoading && (
+  if (isLoading) {
+    return (
+      <main className="flex-1 overflow-y-auto">
+        <div className="pt-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Header />
+          {isLoading && (
+            <div className="flex justify-center mt-32">
+              <LoadingSpinner />
+            </div>
+          )}
+        </div>
+      </main>
+    )
+  }
+
+  if (typeof account?.address === 'undefined' && !isLoading) {
+    return (
+      <main className="flex-1 overflow-y-auto">
+        <div className="pt-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Header />
+          <section
+            className="mx-auto mt-8 pb-16 max-w-5xl"
+            aria-labelledby="gallery-heading"
+          >
+            <ul role="list">
               <>
                 <h1 className="text-center w-full text-4xl md:text-5xl my-16">
                   Please Connect Your Wallet
                 </h1>
                 <Connect />
               </>
-            )}
-            {nftList && nftList?.length > 0 && !isLoading && (
+            </ul>
+          </section>
+        </div>
+      </main>
+    )
+  }
+
+  return (
+    <main className="flex-1 overflow-y-auto">
+      <div className="pt-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Header />
+        <section
+          className="mx-auto mt-8 pb-16 max-w-5xl"
+          aria-labelledby="gallery-heading"
+        >
+          <ul role="list">
+            {nftList && nftList?.length > 0 && account?.address ? (
               <animated.div style={springProps}>
                 <Masonry
                   breakpointCols={{ default: 2, 1200: 1 }}
@@ -61,9 +86,7 @@ const PersonalGallery = ({ nftList, setSelectedNft, isLoading }: Props) => {
                   })}
                 </Masonry>
               </animated.div>
-            )}
-
-            {nftList?.length === 0 && !isLoading && account?.address === 'undefined' && (
+            ) : (
               <EmptyResult />
             )}
           </ul>
