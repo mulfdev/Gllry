@@ -21,15 +21,25 @@ const PersonalGallery = ({ nftList, setSelectedNft, isLoading }: Props) => {
   const { data: account } = useAccount()
   const springProps = useSpring({ opacity: isLoading ? 0 : 1, delay: 400 })
 
+  if (isLoading) {
+    return (
+      <main className="flex-1 overflow-y-auto">
+        <div className="pt-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Header />
+          {isLoading && (
+            <div className="flex justify-center mt-32">
+              <LoadingSpinner />
+            </div>
+          )}
+        </div>
+      </main>
+    )
+  }
+
   return (
     <main className="flex-1 overflow-y-auto">
       <div className="pt-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Header />
-        {isLoading && (
-          <div className="flex justify-center mt-32">
-            <LoadingSpinner />
-          </div>
-        )}
         <section
           className="mx-auto mt-8 pb-16 max-w-5xl"
           aria-labelledby="gallery-heading"
@@ -43,7 +53,7 @@ const PersonalGallery = ({ nftList, setSelectedNft, isLoading }: Props) => {
                 <Connect />
               </>
             )}
-            {nftList && nftList?.length > 0 && !isLoading && (
+            {nftList && nftList?.length > 0 ? (
               <animated.div style={springProps}>
                 <Masonry
                   breakpointCols={{ default: 2, 1200: 1 }}
@@ -61,9 +71,7 @@ const PersonalGallery = ({ nftList, setSelectedNft, isLoading }: Props) => {
                   })}
                 </Masonry>
               </animated.div>
-            )}
-
-            {nftList?.length === 0 && !isLoading && account?.address === 'undefined' && (
+            ) : (
               <EmptyResult />
             )}
           </ul>
