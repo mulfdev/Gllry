@@ -2,7 +2,7 @@
 
 Gllry is a place for you to experience _your_ NFT Collection. The initial scope of Gllry is limited in order to give you the best experience possible. NFT data consistency is somewhat convoluted at this time. Best efforts are made to normalize metadata for supported content types. This project uses [Moralis NFT API](https://docs.moralis.io/moralis-dapp/web3-api/nft-api) as it's datasource. 
 
-The backend (using Next.js serverless functions) fetches the data from the provider. From there, if the NFT API doesn't return any metadata for the token, a HTTP request is sent to the token_uri provided by Moralis. This data is parsed, filtered, and vaildated so it can be rendered by the front-end.
+The backend (using Next.js api routes) fetches the data from the provider. From there, if the NFT API doesn't return any metadata for the token, a HTTP request is sent to the token_uri provided by Moralis. This data is parsed, filtered, and vaildated so it can be rendered by the front-end.
 
 > Only images and videos are supported. Any other content types will not be displayed in your Gllry
 
